@@ -58,4 +58,3 @@ class Follow(models.Model):
         related_name='follower',
         verbose_name='Подписчик'
     )
-
