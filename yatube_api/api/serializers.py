@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from posts.models import Comment, Post, Follow, Group, User
 
@@ -67,12 +66,3 @@ class FollowSerializer(serializers.ModelSerializer):
         if self.context['request'].user == attrs['following']:
             raise serializers.ValidationError('Нельзя подписаться на себя!')
         return attrs
-
-    def create(self, validated_data):
-        user = User.objects.get(username=validated_data['user'])
-        following = get_object_or_404(
-            User,
-            username=validated_data['following']
-        )
-        follow = Follow.objects.create(user=user, following=following)
-        return follow
